@@ -16,7 +16,7 @@ def run_interactive_predictor():
 
     #isolate 2025 test season
     test_df = df[df['season'] == 2025].copy()
-    features = ['diff_rolling_off_epa']
+    features = ['diff_rolling_off_epa', 'diff_rolling_def_epa', 'diff_rolling_turnovers']
 
     print("\n" + "="*50)
     print("        NFL GAME OUTCOME PREDICTOR (2025)")
@@ -63,12 +63,12 @@ def run_interactive_predictor():
     home_prob = model.predict_proba(x_game)[0][1]
     away_prob = 1.0 - home_prob
 
-    #SHAP Explanations
+    # SHAP Explanations
     explainer = shap.TreeExplainer(model)
     shap_vals = explainer.shap_values(x_game)
     impact = shap_vals[1][0] if isinstance(shap_vals, list) else shap_vals[0]
 
-    #display breakdown card
+    # display breakdown card
     print("\n" + "="*50)
     print(f"  PREDICTION: {game['away_team']} @ {game['home_team']}")
     print("="*50)
@@ -76,7 +76,8 @@ def run_interactive_predictor():
     print(f"  Away Team: {game['away_team']:<4} Win Probability -> {away_prob:.1%}")
     
     favored = game['home_team'] if home_prob >= 0.5 else game['away_team']
-    print(f"  Favored  : {favored} by {abs(home_prob - 0.5)*200:.1f} pts spread margin estimate")
+    est_spread = abs(home_prob - 0.5) * 28
+    print(f"  Favored  : {favored} by {est_spread:.1f} pts spread margin estimate")
     
     if pd.notna(game['home_win']):
         actual = game['home_team'] if game['home_win'] == 1 else game['away_team']
