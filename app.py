@@ -76,6 +76,9 @@ selected_matchup_idx = st.sidebar.selectbox(
     format_func=lambda i: matchup_options[i]
 )
 
+st.sidebar.markdown("---")
+st.sidebar.markdown("Built by **[Aiden Everage](https://aideneverageuf.github.io/)**")
+
 game = week_games.iloc[selected_matchup_idx]
 x_game = week_games.loc[[selected_matchup_idx], feature_cols]
 
