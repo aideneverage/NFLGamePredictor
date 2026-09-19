@@ -64,21 +64,6 @@ Run the Streamlit app locally:
 python -m streamlit run app.py
 ```
 
-## Repository Structure
-
-nfl-predictor/
-├── app.py                   # Streamlit web dashboard UI
-├── requirements.txt         # Project dependencies
-├── data/                    
-│   └── processed/           # Generated model_ready_data.csv
-├── models/                  
-│   └── nfl_gb_model.pkl     # Trained scikit-learn model
-└── src/                     
-    ├── data_pipeline.py     # nflverse ingestion & feature engineering
-    └── train_model.py       # Gradient Boosting training script
-
----
-
 ## Author
 
 Created by Aiden Everage.
