@@ -231,7 +231,7 @@ st.markdown("---")
 
 # --- What-If Sandbox ---
 st.subheader("🧪 Custom Game Simulation Sandbox")
-st.caption("Test scenarios (e.g. QB changes or turnover surges) to recalculate win probabixlities live.")
+st.caption("Test scenarios (e.g. QB changes or turnover surges) to recalculate win probabilities live.")
 
 s1, s2, s3 = st.columns(3)
 with s1:
