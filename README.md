@@ -41,7 +41,7 @@ If you want to clone this repository and run the data pipeline or dashboard on y
 Ensure you have Python 3.9+ installed. Clone the repo and install the required dependencies:
 
 ```bash
-git clone [https://github.com/aideneverage/nfl-predictor.git](https://github.com/aideneverage/nfl-predictor.git)
+git clone https://github.com/aideneverage/nfl-predictor.git
 cd nfl-predictor
 pip install -r requirements.txt
 ```
