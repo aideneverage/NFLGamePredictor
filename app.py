@@ -54,7 +54,7 @@ def get_team_qbs(team_abbr):
 
 # --- Sidebar Controls ---
 st.sidebar.title("NFL Outcome Predictor")
-st.sidebar.markdown("Built by **[Aiden Everage](https://github.com/chingu-dev)**")
+st.sidebar.markdown("Built by **[Aiden Everage](https://github.com/aideneverage)**")
 st.sidebar.markdown("---")
 
 app_mode = st.sidebar.radio(
