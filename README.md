@@ -1,6 +1,6 @@
 # NFL Game Outcome Predictor
 
-**Live Dashboard:** [https://nflgamepredictor.streamlit.app/](https://nflgamepredictor.streamlit.app/)
+**Live Dashboard:** [https://nflaiprediction.streamlit.app/](https://nflaiprediction.streamlit.app/)
 
 A machine learning pipeline and interactive web dashboard that predicts NFL game outcomes using historical play-by-play data, rolling team efficiencies, and quarterback metrics. 
 
@@ -41,7 +41,7 @@ If you want to clone this repository and run the data pipeline or dashboard on y
 Ensure you have Python 3.9+ installed. Clone the repo and install the required dependencies:
 
 ```bash
-git clone [https://github.com/YOUR_GITHUB_USERNAME/nfl-predictor.git](https://github.com/YOUR_GITHUB_USERNAME/nfl-predictor.git)
+git clone [https://github.com/aideneverage/nfl-predictor.git](https://github.com/aideneverage/nfl-predictor.git)
 cd nfl-predictor
 pip install -r requirements.txt
 ```
