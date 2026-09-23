@@ -5,11 +5,7 @@ import joblib
 import os
 
 def train_and_evaluate():
-    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    data_path = os.path.join(base_dir, 'data', 'processed', 'model_ready_data.csv')
-    model_dir = os.path.join(base_dir, 'models')
-    model_path = os.path.join(model_dir, 'nfl_gb_model.pkl')
-
+    data_path = '../data/processed/model_ready_data.csv' if os.path.basename(os.getcwd()) == 'src' else 'data/processed/model_ready_data.csv'
     df = pd.read_csv(data_path)
 
     features = [
@@ -21,29 +17,39 @@ def train_and_evaluate():
     ]
     target = 'home_win'
 
-    # Filter only completed games for training & testing
-    completed_games = df[df[target].notna()].copy()
+    # CRITICAL: Only train/test on games that have actually happened!
+    df_played = df[df[target].notna()].copy()
 
-    # Train on 2023 & 2024; test benchmark on 2025
-    train_df = completed_games[completed_games['season'] < 2025]
-    test_df = completed_games[completed_games['season'] == 2025]
+    train_df = df_played[df_played['season'] < 2026]
+    test_df = df_played[df_played['season'] == 2026]
 
     X_train, y_train = train_df[features], train_df[target]
     X_test, y_test = test_df[features], test_df[target]
 
-    print(f"Training samples (2023-2024): {len(X_train)}")
-    print(f"Testing samples (2025): {len(X_test)}")
+    print(f"Training samples (2023-2025): {len(X_train)}")
+    print(f"Testing samples (2026): {len(X_test)}")
 
-    model = GradientBoostingClassifier(n_estimators=150, learning_rate=0.05, max_depth=3, random_state=42)
+    model = GradientBoostingClassifier(
+        n_estimators=150, 
+        learning_rate=0.05, 
+        max_depth=4, 
+        random_state=42
+    )
     model.fit(X_train, y_train)
 
-    preds = model.predict(X_test)
-    probs = model.predict_proba(X_test)[:, 1]
+    # Evaluate accuracy only on completed 2026 games
+    if len(X_test) > 0:
+        preds = model.predict(X_test)
+        probs = model.predict_proba(X_test)[:, 1]
+        print(f"2026 Test Accuracy: {accuracy_score(y_test, preds):.3f}")
+        print(f"2026 Brier Score: {brier_score_loss(y_test, probs):.3f}")
+    else:
+        print("No completed 2026 games yet to evaluate accuracy.")
 
-    print(f"2025 Test Accuracy: {accuracy_score(y_test, preds):.3f}")
-    print(f"2025 Brier Score: {brier_score_loss(y_test, probs):.3f}")
-
+    model_dir = '../models' if os.path.basename(os.getcwd()) == 'src' else 'models'
     os.makedirs(model_dir, exist_ok=True)
+    model_path = os.path.join(model_dir, 'nfl_gb_model.pkl')
+    
     joblib.dump(model, model_path)
     print(f"Model saved to {model_path}")
 
