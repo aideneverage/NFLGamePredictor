@@ -1,6 +1,6 @@
 # NFL Game Outcome Predictor
 
-**Live Dashboard:** [https://nflaiprediction.streamlit.app/](https://nflaiprediction.streamlit.app/)
+**Live Dashboard:** [https://nflgamepredictor.streamlit.app/](https://nflgamepredictor.streamlit.app/)
 
 A machine learning pipeline and interactive web dashboard that predicts NFL game outcomes using historical play-by-play data, rolling team efficiencies, and quarterback metrics. 
 
@@ -11,7 +11,6 @@ This project goes beyond simple win/loss classification by returning well-calibr
 ## Features
 
 - **Live Streamlit Dashboard:** Browse the 2025 schedule, view upcoming game probabilities, and review past game accuracy.
-- **Custom "What-If" Simulator:** Manually pair any two teams and starting quarterbacks to simulate a hypothetical matchup on the fly.
 - **Dynamic Feature Attribution (SHAP):** Visualizes exactly how much the starting Quarterback, Turnover Margin, or Defensive efficiency shifted the odds for a specific game.
 - **No Target Leakage:** Features are strictly engineered using rolling averages that are shifted chronologically. The model only knows what was available *before kickoff*.
 
